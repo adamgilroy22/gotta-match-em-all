@@ -22,16 +22,7 @@ const generateGame = () => {
         throw new Error("The dimension of the board must be an even number.")
     }
 
-    const pokemon = ['https://github.com/adamgilroy22/gotta-match-em-all/blob/main/assets/images/bulbasaur.png?raw=true',
-                    'https://github.com/adamgilroy22/gotta-match-em-all/blob/main/assets/images/charizard.png?raw=true',
-                    'https://github.com/adamgilroy22/gotta-match-em-all/blob/main/assets/images/wartortle.png?raw=true',
-                    'https://github.com/adamgilroy22/gotta-match-em-all/blob/main/assets/images/pikachu.png?raw=true',
-                    'https://github.com/adamgilroy22/gotta-match-em-all/blob/main/assets/images/mewtwo.png?raw=true',
-                    'https://github.com/adamgilroy22/gotta-match-em-all/blob/main/assets/images/eevee.png?raw=true',
-                    'https://github.com/adamgilroy22/gotta-match-em-all/blob/main/assets/images/meowth.png?raw=true',
-                    'https://github.com/adamgilroy22/gotta-match-em-all/blob/main/assets/images/lapras.png?raw=true',
-                    'https://github.com/adamgilroy22/gotta-match-em-all/blob/main/assets/images/snorlax.png?raw=true',
-                    'https://github.com/adamgilroy22/gotta-match-em-all/blob/main/assets/images/ditto.png?raw=true']
+    const pokemon = ['bulbasaur', 'charizard', 'wartortle', 'pikachu', 'mewtwo', 'eevee', 'meowth', 'lapras', 'snorlax', 'ditto']
     const picks = pickRandom(pokemon, (dimensions * dimensions) / 2) 
     const items = shuffle([...picks, ...picks])
     const cards = `
@@ -39,7 +30,7 @@ const generateGame = () => {
             ${items.map(item => `
                 <div class="card">
                     <div class="card-back"></div>
-                    <div class="card-front"><img src='${item}'></div>
+                    <div class="card-front"><img src="assets/images/${item}.png"</div>
                 </div>
             `).join('')}
        </div>
@@ -48,4 +39,45 @@ const generateGame = () => {
     const parser = new DOMParser().parseFromString(cards, 'text/html')
 
     selectors.board.replaceWith(parser.querySelector('.board'))
+}
+
+const pickRandom = (array, items) => {
+    const clonedArray = [...array]
+    const randomPicks = []
+
+    for (let index = 0; index < items; index++) {
+        const randomIndex = Math.floor(Math.random() * clonedArray.length)
+        
+        randomPicks.push(clonedArray[randomIndex])
+        clonedArray.splice(randomIndex, 1)
+    }
+
+    return randomPicks
+}
+
+const shuffle = array => {
+    const clonedArray = [...array]
+
+    for (let index = clonedArray.length - 1; index > 0; index--) {
+        const randomIndex = Math.floor(Math.random() * (index + 1))
+        const original = clonedArray[index]
+
+        clonedArray[index] = clonedArray[randomIndex]
+        clonedArray[randomIndex] = original
+    }
+
+    return clonedArray
+}
+
+const attachEventListeners = () => {
+    document.addEventListener('click', event => {
+        const eventTarget = event.target
+        const eventParent = eventTarget.parentElement
+
+        if (eventTarget.className.includes('card') && !eventParent.className.includes('flipped')) {
+            flipCard(eventParent)
+        } else if (eventTarget.nodeName === 'BUTTON' && !eventTarget.className.includes('disabled')) {
+            startGame()
+        }
+    })
 }

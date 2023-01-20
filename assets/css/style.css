@@ -38,8 +38,8 @@ img {
     cursor: pointer;
 }
 
-.card-front,
-.card-back {
+.card-back,
+.card-front {
     position: absolute;
     border-radius: 5px;
     width: 100%;
