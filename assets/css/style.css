@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'ketchumregular';
+    src: url('ketchum-webfont.woff2') format('woff2'),
+         url('ketchum-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+h1 {
+    font-family: 'ketchumregular';
+}
