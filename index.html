@@ -12,19 +12,18 @@
         <h1>Gotta Match 'Em All!</h1>
     </header>
 
-    <main class="game">
-        <div class="controls">
-            <button>Start</button>
-            <div class="stats">
-                <span class="moves">0 Moves</span>
-                <span class="timer">Timer: 0 sec</span>
-            </div>
+    <div class="wrapper">
+        <div class="stats-container">
+            <div id="moves-count"></div>
+            <div id="time"></div>
         </div>
-        <div class="game-container">
-            <div class="board"></div>
-            <div class="win">You win!</div>
-        </div>
-    </main>
+        <div class="game-container"></div>
+        <button id="stop" class="hide">Stop Game</button>
+    </div>
+    <div class="controls-container">
+        <p id="result"></p>
+        <button id="start">Start Game</button>
+    </div>
 
     <footer>
         Check out my other projects over on <a href="https://github.com/adamgilroy22" target="_blank">GitHub</a> and connect
