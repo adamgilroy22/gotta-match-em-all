@@ -77,8 +77,8 @@ const matrixGenerator = (cardValues, size = 4) => {
   for (let i = 0; i < size * size; i++) {
     /*
         Create Cards
-        before => front side (contains question mark)
-        after => back side (contains actual image);
+        before => front side (contains back of pokemon card)
+        after => back side (contains front of card with image);
         data-card-values is a custom attribute which stores the names of the cards to match later
       */
     gameContainer.innerHTML += `
